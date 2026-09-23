@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f6f1">
+  <meta name="theme-color" content="#090d12">
   <title>Hello World — はじめてのWebページ</title>
   <style>
     :root {
-      color-scheme: light;
+      color-scheme: dark;
       font-family: "Avenir Next", Avenir, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      color: #202c25;
-      background: #f4f6f1;
+      color: #f1f4ed;
+      background: #090d12;
       font-synthesis: none;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      --acid: #c7f36b;
+      --muted: #929ba2;
     }
 
     * { box-sizing: border-box; }
@@ -24,103 +26,201 @@
       margin: 0;
       display: grid;
       place-items: center;
-      padding: 32px 20px;
+      padding: 28px;
+      overflow: hidden;
       background:
-        radial-gradient(ellipse at 15% 10%, rgba(202, 222, 194, .55), transparent 38%),
-        radial-gradient(ellipse at 90% 90%, rgba(236, 215, 177, .42), transparent 34%),
-        #f4f6f1;
+        radial-gradient(ellipse at 72% 48%, rgba(46, 71, 54, .22), transparent 38%),
+        radial-gradient(ellipse at 15% 100%, rgba(26, 44, 57, .28), transparent 43%),
+        #090d12;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .16;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
     }
 
     main {
-      width: min(100%, 720px);
-      min-height: 420px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(36px, 8vw, 76px);
+      width: min(100%, 1100px);
+      min-height: min(690px, calc(100vh - 56px));
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      align-items: center;
       position: relative;
+      isolation: isolate;
       overflow: hidden;
-      border: 1px solid rgba(41, 62, 47, .09);
-      border-radius: 28px;
-      background: rgba(255, 255, 253, .88);
-      box-shadow: 0 24px 70px rgba(44, 59, 45, .09), 0 2px 8px rgba(44, 59, 45, .04);
+      border: 1px solid rgba(206, 226, 205, .13);
+      border-radius: 10px;
+      background: linear-gradient(115deg, rgba(17, 23, 28, .97), rgba(12, 18, 21, .88));
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .55), inset 0 1px rgba(255,255,255,.035);
     }
 
-    main::after {
+    .content {
+      z-index: 2;
+      padding: clamp(38px, 7vw, 88px);
+    }
+
+    .topline, .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #8f999d;
+      font-size: .68rem;
+      font-weight: 650;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+
+    .status { display: flex; align-items: center; gap: 9px; }
+    .status::before {
       content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -80px;
-      top: -95px;
-      border: 1px solid rgba(88, 125, 91, .16);
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      box-shadow: 0 0 0 24px rgba(88, 125, 91, .035), 0 0 0 48px rgba(88, 125, 91, .025);
-      pointer-events: none;
+      background: var(--acid);
+      box-shadow: 0 0 14px var(--acid);
     }
 
     .eyebrow {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin: 0 0 22px;
-      color: #587d5b;
+      gap: 12px;
+      margin: clamp(64px, 10vh, 100px) 0 24px;
+      color: var(--acid);
       font-size: .76rem;
       font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
+      letter-spacing: .2em;
     }
-
-    .eyebrow::before {
-      content: "";
-      width: 26px;
-      height: 1px;
-      background: currentColor;
-    }
+    .eyebrow::before { content: ""; width: 30px; height: 1px; background: currentColor; }
 
     h1 {
       margin: 0;
-      font-size: clamp(3.5rem, 12vw, 6.6rem);
-      line-height: .98;
-      letter-spacing: -.075em;
-      font-weight: 750;
+      font-size: clamp(4.5rem, 10vw, 8.3rem);
+      line-height: .82;
+      letter-spacing: -.09em;
+      font-weight: 760;
     }
-
-    h1 span { color: #66896a; }
+    h1 span { color: var(--acid); }
 
     .intro {
-      max-width: 430px;
-      margin: 28px 0 0;
-      color: #68736a;
-      font-size: clamp(1rem, 2.5vw, 1.12rem);
-      line-height: 1.9;
-      letter-spacing: .025em;
+      max-width: 390px;
+      margin: 34px 0 0;
+      color: #a5afb0;
+      font-size: clamp(.95rem, 2vw, 1.08rem);
+      line-height: 2;
+      letter-spacing: .035em;
     }
 
     .footer {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-top: 52px;
-      color: #879087;
-      font-size: .8rem;
-      letter-spacing: .04em;
+      justify-content: flex-start;
+      gap: 12px;
+      margin-top: clamp(52px, 9vh, 86px);
+      color: #8f999d;
+      letter-spacing: .1em;
+    }
+    .sparkle { color: var(--acid); font-size: 1rem; }
+
+    .visual {
+      position: absolute;
+      z-index: 1;
+      width: min(55vw, 650px);
+      aspect-ratio: 1;
+      top: 50%;
+      right: -5%;
+      transform: translateY(-50%);
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+    .visual::before {
+      content: "";
+      position: absolute;
+      width: 58%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(174, 235, 87, .12);
+      filter: blur(70px);
+    }
+    .orbit {
+      position: absolute;
+      width: 76%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(207, 235, 184, .12);
+      border-radius: 50%;
+      transform: rotate(-28deg) scaleY(.43);
+    }
+    .orbit:nth-child(2) { transform: rotate(54deg) scaleY(.43); width: 91%; border-color: rgba(207, 235, 184, .08); }
+    .orbit:nth-child(3) { transform: rotate(90deg) scaleY(.43); width: 67%; border-color: rgba(199, 243, 107, .22); }
+    .core {
+      position: relative;
+      width: 38%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 34% 29%, #edffc3 0, #c7f36b 8%, #80ae50 29%, #263829 67%, #111916 100%);
+      box-shadow: 0 0 50px rgba(177, 238, 97, .16), inset -18px -22px 40px rgba(0,0,0,.56), inset 10px 8px 24px rgba(242,255,203,.18);
+    }
+    .core::after {
+      content: "";
+      position: absolute;
+      inset: 13%;
+      border: 1px solid rgba(236,255,199,.2);
+      border-radius: 50%;
+    }
+    .node {
+      position: absolute;
+      top: 18%;
+      left: 22%;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 20px 5px rgba(199,243,107,.42);
+    }
+    .index {
+      position: absolute;
+      right: 30px;
+      bottom: 28px;
+      color: #697478;
+      font: 600 .67rem/1 monospace;
+      letter-spacing: .12em;
     }
 
-    .sparkle { color: #c3924e; font-size: 1rem; }
-
-    @media (max-width: 480px) {
-      main { min-height: 390px; border-radius: 22px; }
-      .footer { margin-top: 40px; }
+    @media (max-width: 680px) {
+      body { padding: 14px; }
+      main { min-height: calc(100svh - 28px); grid-template-columns: 1fr; border-radius: 8px; }
+      .content { padding: 30px 28px; }
+      .topline { font-size: .58rem; }
+      .eyebrow { margin-top: 72px; }
+      h1 { font-size: clamp(4.4rem, 19vw, 7rem); }
+      .visual { width: 94vw; right: -36%; top: 61%; opacity: .52; }
+      .intro { position: relative; z-index: 2; }
+      .footer { margin-top: 68px; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .visual { animation: arrive 1.2s cubic-bezier(.2,.7,.2,1) both; }
+      .core { animation: breathe 7s ease-in-out infinite alternate; }
+      @keyframes arrive { from { opacity: 0; transform: translate(35px, -50%) scale(.94); } to { opacity: 1; transform: translate(0, -50%) scale(1); } }
+      @keyframes breathe { to { transform: scale(1.035); filter: brightness(1.12); } }
     }
   </style>
 </head>
 <body>
   <main>
-    <p class="eyebrow">はじめての一歩</p>
-    <h1>Hello<br><span>World!</span></h1>
-    <p class="intro">Codexを使った最初のWebページです。<br>ここから、アイデアを形にしていきましょう。</p>
-    <div class="footer"><span class="sparkle" aria-hidden="true">✳</span> Your next idea starts here.</div>
+    <div class="content">
+      <div class="topline"><span>CODEX / 001</span><span class="status">IDEA IN MOTION</span></div>
+      <p class="eyebrow">はじめての一歩</p>
+      <h1>Hello<br><span>World!</span></h1>
+      <p class="intro">Codexとつくる、最初のWebページ。<br>アイデアに火を灯して、ここから形に。</p>
+      <div class="footer"><span class="sparkle" aria-hidden="true">✳</span> Your next idea starts here.</div>
+    </div>
+    <div class="visual" aria-hidden="true">
+      <div class="orbit"></div><div class="orbit"></div><div class="orbit"></div>
+      <div class="core"></div><div class="node"></div>
+    </div>
+    <div class="index">EST. 2026&nbsp;&nbsp; / &nbsp;&nbsp;TOKYO</div>
   </main>
 </body>
 </html>
